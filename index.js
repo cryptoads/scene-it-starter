@@ -7,7 +7,7 @@ var renderMovies = function(movieArray) {
         finalHTML += '<div class="card-body">'
         finalHTML += '<h1>'+ movie.Title +'</h1>'
         finalHTML += '<h3>' + movie.Year +'</h3>'
-        finalHTML += '<button class = "add">add</button>'
+        finalHTML += '<button data-id="'+movie.imdbID+'" class = "add">add</button>'
         finalHTML += '</div></div>'
     });
     return finalHTML;
@@ -18,6 +18,20 @@ $('form').on('submit', function(e){
     e.preventDefault();
     var testHTML = renderMovies(movieData);
     $('.movieshow').html(testHTML);
+});
+
+$('.movies-container').on('click', '.add', function(){
+    var imdbID = $(this).data('id');
+    var movie = movieData.find(function(currentMovie){
+        return currentMovie.imdbID == imdbID;
+    });
+    
+    var watchListJSON = JSON.parse(localStorage.getItem('watchlist'))
+    if(!watchListJSON){
+        watchListJSON = [];
+    };
+    watchListJSON.push(movie);
+    localStorage.setItem('watchlist', JSON.stringify(watchListJSON));
 });
 
 
