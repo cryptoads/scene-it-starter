@@ -14,6 +14,8 @@ $(function(){
     });
     return finalHTML;
 };
+if(myMovies){
     var testHTML = renderMovies(myMovies);
     $('.movies-container').html(testHTML);
+};
 });
