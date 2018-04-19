@@ -18,15 +18,13 @@ $('form').on('submit', function(e){
     e.preventDefault();
     var searchString = encodeURIComponent($('.search-bar').val());
     $.ajax({
-        url:  "http://www.omdbapi.com/?apikey=3430a78&s=" + searchString,
+        url:  "https://www.omdbapi.com/?apikey=3430a78&s=" + searchString,
         method: 'GET',
         success: function(response){
                 var testHTML = renderMovies(response.Search);
                  $('.movieshow').html(testHTML);
         }
     });
-
-
 });
 
 $('.movies-container').on('click', '.add', function(){
